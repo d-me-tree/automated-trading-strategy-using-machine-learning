@@ -45,6 +45,7 @@ Set up your Python environment with the requisite libraries, install and test Zi
    - To resume working, you can run `docker start -a -i ml4t` from Mac OS terminal or Windows Powershell in the root directory to restart the container and attach it to the host shell in interactive mode (see Docker docs for more detail).
    - To get information about the container, run `docker inspect liveproject`
    - To view memory use and other resource usage stats: run `docker stats`
+   > The `installation` directory contains the Dockerfile used to create the image as well as the `conda` environment files; feel free to use/modify them as you see fit for this project.
 6. Now you are running a shell inside the container and can access the `conda` environments.
     - Run `conda env list` to see that there are a `base`, `liveproject` (default), and a `liveproject-zipline` environment.
     - You can **switch to another `conda` environment** using the command `conda activate <env_name>` (you can also switch to another environment from a notebook as we'll explain below) 
@@ -74,7 +75,18 @@ Set up your Python environment with the requisite libraries, install and test Zi
    - The command `zipline bundles` displays the ingest history.
    - When running a backtest, you will likely encounter an [error](https://github.com/quantopian/zipline/issues/2517) because the current Zipline version requires a country code entry in the `exchanges` table of the `assets-7.sqlite` database where it stores the asset metadata. 
         - The linked issue describes how to address this by [opening the SQLite database](https://sqlitebrowser.org/dl/) and entering `US` in the `country_code` field of the `exchanges`.
-        - Alternatively, you could pass the argument `domain = EquityCalendarDomain('??', trading_calendar.name)` when instantiating a `zipline.Pipeline` object in part 4, where `trading_calendar = get_calendar('NYSE')`. I'd suggest modifying the table, though, as it's fairly straightforward and solves this issue for good.
+         In practice, this looks as follows:
+         1. Use the [SQLite Browser](https://sqlitebrowser.org/dl/) to open the file `assets-7.sqlite` in the directory containing your latest bundle download. The path will look like this (on Linux/Max OSX) if you ran the command as just described:  `~/machine-learning-for-trading/data/.zipline/data/quandl/2020-12-29T02;06;08.894865/`
+         2. Select the table `exchanges` as outlined in the following screenshot:
+         <p align="center">
+         <img src="https://i.imgur.com/khq6gtX.png" title="Modifying QUANDL SQLite - Step 1" width="50%"/>
+         </p>
+         3. Insert the country code and save the result (you'll get a prompt when closing the program):
+         <p align="center">
+         <img src="https://i.imgur.com/mtdiylk.png" title="Modifying QUANDL SQLite - Step 1" width="50%"/>
+         </p>
+         That's all. Unfortunately, you need to repeat this everytime you run `zipline ingest`.
+        - Alternatively, you could pass the argument `domain = EquityCalendarDomain('??', trading_calendar.name)` when instantiating a `zipline.Pipeline` object in part 4, where `trading_calendar = get_calendar('NYSE')`. I'd suggest modifying the table, though, as it's fairly straightforward and solves this issue for good (well, until the next `zipline ingest`).
    - Now you can implement the [Dual Moving Average Cross-Over example](https://www.zipline.io/beginner-tutorial.html#access-to-previous-prices-using-history) from the Zipline tutorial in the following notebook cells to familiarize yourself with the Zipline interface. It should display the backtest results at the end.
 9. Finally, after logging into Quandl, download the [Quandl Wiki Stock data](https://www.quandl.com/tables/WIKIP/WIKI-PRICES/export) and unzip into the root directory of the project starter files as `us_stocks.csv`. Then, create a second notebook to simplify the data as follows (see pandas [docs](https://pandas.pydata.org/docs/) as necessary), using the `liveproject` environment: 
     - Convert the `date` column to `datetime` format
@@ -95,3 +107,4 @@ Set up your Python environment with the requisite libraries, install and test Zi
 - [Docker Cheatsheet](https://raw.githubusercontent.com/sangam14/dockercheatsheets/master/dockercheatsheet8.png)
 - [A comprehensive introduction to Docker, Virtual Machines, and Containers](https://www.freecodecamp.org/news/comprehensive-introductory-guide-to-docker-vms-and-containers-4e42a13ee103/)
 - [Zipline Beginner Tutorial](https://www.zipline.io/beginner-tutorial.html#my-first-algorithm)
+
