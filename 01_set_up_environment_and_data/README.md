@@ -42,7 +42,7 @@ Set up your Python environment with the requisite libraries, install and test Zi
         ```
    How to work with Docker:
    - Run `exit` from the container shell to exit and stop the container. 
-   - To resume working, you can run `docker start -a -i ml4t` from Mac OS terminal or Windows Powershell in the root directory to restart the container and attach it to the host shell in interactive mode (see Docker docs for more detail).
+   - To resume working, you can run `docker start -a -i liveproject` from Mac OS terminal or Windows Powershell in the root directory to restart the container and attach it to the host shell in interactive mode (see Docker docs for more detail).
    - To get information about the container, run `docker inspect liveproject`
    - To view memory use and other resource usage stats: run `docker stats`
    > The `installation` directory contains the Dockerfile used to create the image as well as the `conda` environment files; feel free to use/modify them as you see fit for this project.

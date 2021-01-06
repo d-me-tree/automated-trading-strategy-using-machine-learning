@@ -20,11 +20,12 @@ This requires the following steps:
         - the Average Directional Movement Index (ADX), 
         - the Moving Average Convergence Divergence (MACD), 
         - the Relative Strength Index (RSI), 
-        - the Balance of Power (BOP) indictor, or 
+        - the Balance of Power (BOP) indicator, or 
         - the Money Flow Index (MFI).
     - Compute TA-Lib **volume** indicators like On Balance Volume (OBV) or the Chaikin A/D Oscillator (ADOSC)
     - Create volatility metrics such as the Normalized Average True Range (NATR).
     - Compute rolling factor betas using the five Fama-French risk factors for different rolling windows of three and 12 months (see resources below).
+    - *Optional*: the above technical indicators are a useful starting point because they are quite familiar to traders (and straightforward to compute). If you are already experienced in the trading domain, feel free to develop more sophisticated (and more promising) alternatives (see resources, e.g. the book by [Marcos Lopez de Prado](http://www.quantresearch.org/index.html) that summarizes fairly recent research in the area, some of which also available from the linked website.
     - Compute the outcome variable that we will aim to predict, namely the 1-day forward returns.
     - Evaluate the predictive content of your financial features with respect to the 1-day forward returns using several metrics, including:
         - the information coefficient (i.e., the Spearman rank correlation)
@@ -48,3 +49,4 @@ If you are already familiar with ML, you may know that feature engineering is a 
 - [SHAP values repository](https://github.com/slundberg/shap)
 - [Explain Your Model with the SHAP Values](https://towardsdatascience.com/explain-your-model-with-the-shap-values-bc36aac4de3d)
 - [Alphlens docs](https://quantopian.github.io/alphalens/)
+- [Advances in Financial Machine Learning](https://www.wiley.com/en-us/Advances+in+Financial+Machine+Learning-p-9781119482109), Marcos Lopez de Prado, 2018
