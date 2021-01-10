@@ -5,7 +5,7 @@
 
 ```bash
 # NOTE: run WITHOUT --rm so that I can re-start the container
-docker run -it -v $(pwd):/home/manning/liveproject -p 8888:8888 -e QUANDL_API_KEY=iJyEQsAZu5iAhtxW8hBi --name liveproject appliedai/manning:liveproject bash
+docker run -it -v $(pwd):/home/manning/liveproject -p 8888:8888 -e QUANDL_API_KEY=<QUANDL_API_KEY> --name liveproject appliedai/manning:liveproject bash
 
 # Continue your work using
 docker start -a -i liveproject
